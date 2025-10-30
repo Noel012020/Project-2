@@ -1,0 +1,8 @@
+---
+title: "Project 2"
+author: "Noel Pop"
+date: "2025-10-30"
+output: pdf_document
+---
+
+## Setting Up the Project
