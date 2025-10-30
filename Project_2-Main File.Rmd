@@ -1,8 +1,73 @@
 ---
 title: "Project 2"
 author: "Noel Pop"
-date: "2025-10-30"
-output: pdf_document
+date: "10/30/2025"
+output:
+  pdf_document
+subtitle: "CPSC 292 Section #02#"
 ---
 
-## Setting Up the Project
+# Project 1: Best-Selling Video Games of All Time
+
+```{r setup, include = FALSE}
+#Loading required libraries
+library(tinytex)
+library(tidyr)
+library(janitor)
+library(readxl)
+library(lubridate)
+library(ggplot2)
+library(dplyr)
+library(paletteer)
+library(patchwork)
+```
+
+## Loading And Cleaning Data
+```{r}
+game.data <- read.csv("game.data/best-selling video games of all time.csv")
+game.data
+```
+
+```{r}
+game.data.clean <- game.data %>%
+clean_names() %>%
+remove_empty(which = c("rows","cols")) %>%
+na.omit(game.data) %>%
+mutate(sales = sales / 100000)
+game.data.clean
+```
+### Cleaning Steps Description:
+This cleans the data names, removes any empty columns or rows, and omits any NA data.
+
+## Visualization
+
+### First Analysis:
+```{r}
+plot1 <- ggplot(game.data.clean) + geom_boxplot(aes(x = platform_s, y = sales, fill = platform_s)) + theme(legend.position = "none", axis.title.x = element_text(face = "bold"), axis.title.y = element_text(face = "bold"), plot.title = element_text(face = "bold")) + labs(title = "Number Of Sales of Best-Selling Games On Each Platform", x = "Platform", y = "Number of Sold Copies (x100000)") + scale_fill_paletteer_d("MetBrewer::Signac") + coord_flip()
+plot1
+```
+### First Analysis Description:
+These plots shows us different platforms that the most sold video games of all time uses.
+
+### Second Analysis:
+```{r}
+color.base <- paletteer::paletteer_d("MetBrewer::Signac")
+color <- rep(color.base, length.out = 18)
+plot2 <- ggplot(game.data.clean) + geom_bar(aes(x = publisher_s, fill = publisher_s)) + theme(legend.position = "none", axis.title.x = element_text(face = "bold"), axis.title.y = element_text(face = "bold"), plot.title = element_text(face = "bold")) + labs(title = "How Many Best-Selling Games Sold By Each Publisher", x = "Publisher", y = "Number of Games", fill = "Publisher") + scale_fill_manual(values = color, name = "Publisher") + coord_flip()
+plot2
+```
+### Second Analysis Description:
+These plots show us how many of the best selling video games of all time belong to each publisher.
+
+## Responses To Feedback
+Some of the major feedback I received was to change the format of the titles on the plot and to adjust them to make it easier to understand. Another feedback point was to change how the number of copies displays the sold amount of games by changing the ratio of what the numbers mean on the graph. Another suggestion was to change the color of the lines of the boxplot because some games did not have a spread; however, this was not possible as the boxplot breaks and would require some large workarounds that did not lead to a successful result. A final suggestion was to make sure both graphs share the same color palette; however, both graphs already did share the same palette. Since not all the different games have a boxplot but a line, those with lines appeared with no color even though the palette is still assigning the color to that game. Nevertheless, it looks like the colors are skipping when in reality they are not. I was not sure of how to fix this or what changes I could make to make it better. 
+For the first visualization, the sales axis was divided by x100000 to make it easier to read the plot and directly compare different games to each other. Furthermore, for extra clarity, the name was changed from number of sales to number of sold copies. This identifies that the graph is talking about sold game copies v. the amount of profit from each game sold. For both visualizations, the titles for both the x and y axis as well as the plot title were bolded. This was to help differentiate from the game labels and to make the plot more clear to understand.
+
+## References
+https://dplyr.tidyverse.org/
+https://ianadamsresearch.com/post/using-ggplot2-to-visualize-the-frequency-of-your-name/
+https://github.com/thomasp85/patchwork#patchwork
+https://www.sthda.com/english/wiki/bar-plots-r-base-graphs
+https://exts.ggplot2.tidyverse.org/gallery/ 
+https://r-graph-gallery.com/ggplot2-color.html
+
