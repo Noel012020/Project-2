@@ -1,7 +1,7 @@
 ---
 title: "Project 2"
-author: "Noel Pop"
-date: "10/30/2025"
+authors: "Noel Pop and Georgia Cameron"
+date: "10/31/2025"
 output:
   pdf_document
 subtitle: "CPSC 292 Section #02#"
@@ -59,9 +59,6 @@ plot2
 ### Second Analysis Description:
 These plots show us how many of the best selling video games of all time belong to each publisher.
 
-## Responses To Feedback
-Some of the major feedback I received was to change the format of the titles on the plot and to adjust them to make it easier to understand. Another feedback point was to change how the number of copies displays the sold amount of games by changing the ratio of what the numbers mean on the graph. Another suggestion was to change the color of the lines of the boxplot because some games did not have a spread; however, this was not possible as the boxplot breaks and would require some large workarounds that did not lead to a successful result. A final suggestion was to make sure both graphs share the same color palette; however, both graphs already did share the same palette. Since not all the different games have a boxplot but a line, those with lines appeared with no color even though the palette is still assigning the color to that game. Nevertheless, it looks like the colors are skipping when in reality they are not. I was not sure of how to fix this or what changes I could make to make it better. 
-For the first visualization, the sales axis was divided by x100000 to make it easier to read the plot and directly compare different games to each other. Furthermore, for extra clarity, the name was changed from number of sales to number of sold copies. This identifies that the graph is talking about sold game copies v. the amount of profit from each game sold. For both visualizations, the titles for both the x and y axis as well as the plot title were bolded. This was to help differentiate from the game labels and to make the plot more clear to understand.
 
 ## References
 https://dplyr.tidyverse.org/
