@@ -59,6 +59,23 @@ plot2
 ### Second Analysis Description:
 These plots show us how many of the best selling video games of all time belong to each publisher.
 
+### Plot 1 with Summary Function
+```{r}
+my_summary <- function(x) {
+  m <- mean(x)
+  s <- sd(x)
+  data.frame(y = m, ymin = m-s, ymax = m + s)
+}
+
+ggplot(game.data.clean, aes(x = platform_s, y = sales, fill = platform_s)) + geom_boxplot() + 
+  theme(legend.position = "none", axis.title.x = element_text(face = "bold"), axis.title.y = element_text(face = "bold"), plot.title = element_text(face = "bold")) + labs(title = "Number Of Sales of Best-Selling Games On Each Platform", x = "Platform", y = "Number of Sold Copies (x100000)") + 
+  scale_fill_paletteer_d("MetBrewer::Signac") + 
+  coord_flip() + 
+  stat_summary(fun.data = my_summary, 
+               geom = "pointrange", 
+               color = "steelblue", 
+               size = 0.5)
+```
 
 ## References
 https://dplyr.tidyverse.org/
