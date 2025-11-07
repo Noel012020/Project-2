@@ -59,22 +59,50 @@ plot2
 ### Second Analysis Description:
 These plots show us how many of the best selling video games of all time belong to each publisher.
 
-### Plot 1 with Summary Function
+
+### Plot 1 with Function
+
 ```{r}
-my_summary <- function(x) {
-  m <- mean(x)
-  s <- sd(x)
-  data.frame(y = m, ymin = m-s, ymax = m + s)
+make_plot <- function(data, x_var, y_var, geom_layer) {
+  ggplot(data, aes_string(x = x_var, y = y_var, fill = x_var)) + 
+    geom_layer() +
+    theme(
+      legend.position = "none",
+      axis.title.x = element_text(face = "bold"),
+      axis.title.y = element_text(face = "bold"),
+      plot.title = element_text(face = "bold")
+    ) +
+    coord_flip()
 }
 
-ggplot(game.data.clean, aes(x = platform_s, y = sales, fill = platform_s)) + geom_boxplot() + 
-  theme(legend.position = "none", axis.title.x = element_text(face = "bold"), axis.title.y = element_text(face = "bold"), plot.title = element_text(face = "bold")) + labs(title = "Number Of Sales of Best-Selling Games On Each Platform", x = "Platform", y = "Number of Sold Copies (x100000)") + 
-  scale_fill_paletteer_d("MetBrewer::Signac") + 
-  coord_flip() + 
-  stat_summary(fun.data = my_summary, 
-               geom = "pointrange", 
-               color = "steelblue", 
-               size = 0.5)
+plot1 <- make_plot(game.data.clean, "platform_s", "sales", geom_boxplot) 
+
+plot1 <- plot1 + 
+  labs(
+      title = "Number Of Sales of Best-Selling Games On Each Platform", 
+      x = "Platform", 
+      y = "Number of Sold Copies (x100000)") +
+  scale_fill_paletteer_d("MetBrewer::Signac")
+
+plot1
+```
+
+### Plot 2 with Function
+
+```{r}
+plot2 <- make_plot(game.data.clean, "publisher_s", geom_layer = geom_bar)
+
+
+plot2 <- plot2 +
+  labs(
+    title = "How Many Best-Selling Games Sold By Each Publisher",
+    x = "Publisher",
+    y = "Number of Games",
+    fill = "Publisher"
+  ) +
+  scale_fill_manual(values = color)
+
+plot2
 ```
 
 ## References
@@ -84,4 +112,7 @@ https://github.com/thomasp85/patchwork#patchwork
 https://www.sthda.com/english/wiki/bar-plots-r-base-graphs
 https://exts.ggplot2.tidyverse.org/gallery/ 
 https://r-graph-gallery.com/ggplot2-color.html
+
+
+
 
