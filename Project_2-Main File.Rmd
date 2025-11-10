@@ -39,24 +39,24 @@ game.data.clean
 ### Cleaning Steps Description:
 This cleans the data names, removes any empty columns or rows, and omits any NA data.
 
-## Visualization
+## Visualizations
 
-### First Analysis:
+### Original Plot 1:
 ```{r}
 plot1 <- ggplot(game.data.clean) + geom_boxplot(aes(x = platform_s, y = sales, fill = platform_s)) + theme(legend.position = "none", axis.title.x = element_text(face = "bold"), axis.title.y = element_text(face = "bold"), plot.title = element_text(face = "bold")) + labs(title = "Number Of Sales of Best-Selling Games On Each Platform", x = "Platform", y = "Number of Sold Copies (x100000)") + scale_fill_paletteer_d("MetBrewer::Signac") + coord_flip()
 plot1
 ```
-### First Analysis Description:
-These plots shows us different platforms that the most sold video games of all time uses.
+### Description of Plot 1:
+This plots shows us different platforms that the most sold video games of all time uses.
 
-### Second Analysis:
+### Original Plot 2:
 ```{r}
 color.base <- paletteer::paletteer_d("MetBrewer::Signac")
 color <- rep(color.base, length.out = 18)
 plot2 <- ggplot(game.data.clean) + geom_bar(aes(x = publisher_s, fill = publisher_s)) + theme(legend.position = "none", axis.title.x = element_text(face = "bold"), axis.title.y = element_text(face = "bold"), plot.title = element_text(face = "bold")) + labs(title = "How Many Best-Selling Games Sold By Each Publisher", x = "Publisher", y = "Number of Games", fill = "Publisher") + scale_fill_manual(values = color, name = "Publisher") + coord_flip()
 plot2
 ```
-### Second Analysis Description:
+### Description of Plot 2:
 These plots show us how many of the best selling video games of all time belong to each publisher.
 
 
@@ -82,11 +82,14 @@ plot1 <- plot1 +
       title = "Number Of Sales of Best-Selling Games On Each Platform", 
       x = "Platform", 
       y = "Number of Sold Copies (x100000)") +
-  scale_fill_paletteer_d("MetBrewer::Signac") +
-  
+  scale_fill_paletteer_d("MetBrewer::Signac")
 
-plot1
+
+plot 1
 ```
+
+## Description of Plot 1 with Function
+This plot produces the same visualization as the original code. A "make_plot" function was made to simplify the code and accept arguments including the data set, x variable, y variable, and geom layer style. 
 
 ### Plot 2 with Function and Conditional
 
@@ -110,6 +113,9 @@ plot2 <- make_plot(game.data.clean, "publisher_s", geom_layer = geom_bar) +
 
 plot2
 ```
+## Description of Plot 1 with Function
+This plot produces the same visualization as the original code. The "make_plot" function was used to create the visualtion. A conditional was added to the geom text layer to include labels for the number of games sold by each publisher if the value was greater than 1. This feature adds an additional visual element that makes interpreting the data easier. 
+
 
 ## References
 https://dplyr.tidyverse.org/
