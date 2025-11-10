@@ -82,25 +82,31 @@ plot1 <- plot1 +
       title = "Number Of Sales of Best-Selling Games On Each Platform", 
       x = "Platform", 
       y = "Number of Sold Copies (x100000)") +
-  scale_fill_paletteer_d("MetBrewer::Signac")
+  scale_fill_paletteer_d("MetBrewer::Signac") +
+  
 
 plot1
 ```
 
-### Plot 2 with Function
+### Plot 2 with Function and Conditional
 
 ```{r}
-plot2 <- make_plot(game.data.clean, "publisher_s", geom_layer = geom_bar)
 
-
-plot2 <- plot2 +
+plot2 <- make_plot(game.data.clean, "publisher_s", geom_layer = geom_bar) +
   labs(
     title = "How Many Best-Selling Games Sold By Each Publisher",
     x = "Publisher",
     y = "Number of Games",
     fill = "Publisher"
-  ) +
-  scale_fill_manual(values = color)
+  ) + 
+  scale_fill_manual(values = color) +
+  geom_text(
+    stat = "count",
+    aes(label = ifelse(after_stat(count) > 1, after_stat(count), "")),
+    vjust = 0,
+    hjust = -0.5,
+    size = 2
+  )
 
 plot2
 ```
