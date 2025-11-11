@@ -61,7 +61,7 @@ plot2
 ### Description of Plot 2:
 These plots show us how many of the best selling video games of all time belong to each publisher.
 
-### Plot 1 with Function
+### Plot 1 with Function and Loop
 ```{r}
 make_plot <- function(data, x_var, y_var, geom_layer) {
   ggplot(data, aes_string(x = x_var, y = y_var, fill = x_var)) + 
@@ -108,9 +108,8 @@ plot1_with_medians <- plot1 +
 
 plot1_with_medians
 ```
-
-## Description of Plot 1 with Function
-This plot produces the same visualization as the original code. A "make_plot" function was made to simplify the code and accept arguments including the data set, x variable, y variable, and geom layer style. 
+## Description of Plot 1 with Function and Loop
+This plot produces the same visualization as the original code. A "make_plot" function was made to simplify the code and accept arguments including the data set, x variable, y variable, and geom layer style. A loop was used to create the median values of number of sold copies (x100000) for each platform, providing a better understanding of which kind of platforms get more sales based on their games.
 
 ### Plot 2 with Function and Conditional
 ```{r}
@@ -132,7 +131,7 @@ plot2 <- make_plot(game.data.clean, "publisher_s", geom_layer = geom_bar) +
 
 plot2
 ```
-## Description of Plot 1 with Function
+## Description of Plot 2 with Function and Conditional
 This plot produces the same visualization as the original code. The "make_plot" function was used to create the visualization. A conditional was added to the geom text layer to include labels for the number of games sold by each publisher if the value was greater than 1. This feature adds an additional visual element that makes interpreting the data easier. 
 
 ## References
