@@ -35,6 +35,9 @@ remove_empty(which = c("rows","cols")) %>%
 na.omit(game.data) %>%
 mutate(sales = sales / 100000)
 game.data.clean
+
+platforms <- sort(unique(game.data.clean$platform_s))
+label_df <- data.frame(platform_s = platforms, median_sales = NA)
 ```
 ### Cleaning Steps Description:
 This cleans the data names, removes any empty columns or rows, and omits any NA data.
@@ -61,11 +64,10 @@ These plots show us how many of the best selling video games of all time belong 
 
 
 ### Plot 1 with Function
-
 ```{r}
 make_plot <- function(data, x_var, y_var, geom_layer) {
   ggplot(data, aes_string(x = x_var, y = y_var, fill = x_var)) + 
-    geom_layer() +
+    geom_layer(width = 0.5) +
     theme(
       legend.position = "none",
       axis.title.x = element_text(face = "bold"),
@@ -77,19 +79,40 @@ make_plot <- function(data, x_var, y_var, geom_layer) {
 
 plot1 <- make_plot(game.data.clean, "platform_s", "sales", geom_boxplot) 
 
-plot1 <- plot1 + 
-  labs(
-      title = "Number Of Sales of Best-Selling Games On Each Platform", 
+plot1 <- plot1 +
+  labs(title = "Number Of Sales of Best-Selling Games On Each Platform", 
       x = "Platform", 
       y = "Number of Sold Copies (x100000)") +
   scale_fill_paletteer_d("MetBrewer::Signac") +
-  
+  scale_x_discrete(expand = expansion(mult = c(0.05, 0.1)))
 
-plot1
+
+for (i in seq_along(platforms)) {
+  p <- platforms[i]
+  label_df$median_sales[i] <- median(
+    game.data.clean$sales[game.data.clean$platform_s == p],
+    na.rm = TRUE
+  )
+}
+
+label_df
+
+plot1_with_medians <- plot1 +
+  geom_text(
+    data = label_df,
+    aes(x = platform_s,
+        y = median_sales,
+        label = round(median_sales, 1)),
+    color = "black",
+    size = 2.5,
+    vjust = -1.25,
+    hjust = 0.50
+  )
+
+plot1_with_medians
 ```
 
 ### Plot 2 with Function and Conditional
-
 ```{r}
 
 plot2 <- make_plot(game.data.clean, "publisher_s", geom_layer = geom_bar) +
@@ -103,8 +126,8 @@ plot2 <- make_plot(game.data.clean, "publisher_s", geom_layer = geom_bar) +
   geom_text(
     stat = "count",
     aes(label = ifelse(after_stat(count) > 1, after_stat(count), "")),
-    vjust = 0,
-    hjust = -0.5,
+    vjust = 0.3,
+    hjust = -0.75,
     size = 2
   )
 
