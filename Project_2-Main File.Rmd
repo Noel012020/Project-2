@@ -85,7 +85,7 @@ plot1 <- plot1 +
   scale_fill_paletteer_d("MetBrewer::Signac")
 
 
-plot 1
+plot1
 ```
 
 ## Description of Plot 1 with Function
@@ -114,7 +114,7 @@ plot2 <- make_plot(game.data.clean, "publisher_s", geom_layer = geom_bar) +
 plot2
 ```
 ## Description of Plot 1 with Function
-This plot produces the same visualization as the original code. The "make_plot" function was used to create the visualtion. A conditional was added to the geom text layer to include labels for the number of games sold by each publisher if the value was greater than 1. This feature adds an additional visual element that makes interpreting the data easier. 
+This plot produces the same visualization as the original code. The "make_plot" function was used to create the visualization. A conditional was added to the geom text layer to include labels for the number of games sold by each publisher if the value was greater than 1. This feature adds an additional visual element that makes interpreting the data easier. 
 
 
 ## References
