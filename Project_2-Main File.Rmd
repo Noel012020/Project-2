@@ -62,10 +62,10 @@ plot2
 These plots show us how many of the best selling video games of all time belong to each publisher.
 
 ### Plot 1 with Function and Loop
-```{r}
+```{r, fig.height=7}
 make_plot <- function(data, x_var, y_var, geom_layer) {
   ggplot(data, aes_string(x = x_var, y = y_var, fill = x_var)) + 
-    geom_layer(width = 0.5) +
+    geom_layer(width = 0.35) +
     theme(
       legend.position = "none",
       axis.title.x = element_text(face = "bold"),
@@ -102,7 +102,7 @@ plot1_with_medians <- plot1 +
         label = round(median_sales, 1)),
     color = "black",
     size = 2.5,
-    vjust = -1.25,
+    vjust = -1.75,
     hjust = 0.50
   )
 
