@@ -24,7 +24,6 @@ library(patchwork)
 ## Loading And Cleaning Data
 ```{r}
 game.data <- read.csv("game.data/best-selling video games of all time.csv")
-game.data
 ```
 
 ```{r}
@@ -33,7 +32,6 @@ clean_names() %>%
 remove_empty(which = c("rows","cols")) %>%
 na.omit(game.data) %>%
 mutate(sales = sales / 100000)
-game.data.clean
 
 platforms <- sort(unique(game.data.clean$platform_s))
 label_df <- data.frame(platform_s = platforms, median_sales = NA)
@@ -102,7 +100,7 @@ plot1_with_medians <- plot1 +
         label = round(median_sales, 1)),
     color = "black",
     size = 2.5,
-    vjust = -1.75,
+    vjust = -2.0,
     hjust = 0.50
   )
 
