@@ -150,7 +150,6 @@ A conditional was added to the geom text layer to include labels for the number 
 ## Responses to Feedback
 There were a few changes that were made to the code and data to improve the visualizations. These include renaming the data folder from "game.data" to "data". Additionally, the style was improved and revised according to style guide in Best Practices. Comments were also added to describe each section of code.  
 
-
 ## References
 https://dplyr.tidyverse.org/
 https://ianadamsresearch.com/post/using-ggplot2-to-visualize-the-frequency-of-your-name/
