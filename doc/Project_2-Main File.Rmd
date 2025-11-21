@@ -24,8 +24,12 @@ library(patchwork)
 
 ## Reading Data
 ```{r}
+<<<<<<< HEAD
 # Read CSV file from data folder
 game.data <- read.csv("data/best-selling video games of all time.csv")
+=======
+game.data <- read.csv("../data/best-selling video games of all time.csv")
+>>>>>>> f47f9b0782c73e54b5279108b6f427454b5272a6
 ```
 
 ## Cleaning Data
@@ -37,6 +41,7 @@ game.data.clean <- game.data %>%
   na.omit() %>%
   mutate(sales = sales / 100000)
 
+# Adds data frame with median sales for each platform
 platforms <- sort(unique(game.data.clean$platform_s))
 label_df <- data.frame(platform_s = platforms, median_sales = NA)
 ```
@@ -48,8 +53,12 @@ This cleans the data names, removes any empty columns or rows, and omits any NA 
 
 ### Plot 1 with Function and Loop
 ```{r, fig.height=7}
+<<<<<<< HEAD
 
 #Plot function that makes basic plot
+=======
+#Plot function
+>>>>>>> f47f9b0782c73e54b5279108b6f427454b5272a6
 make_plot <- function(data, x_var, y_var, geom_layer) {
   if (is.null(y_var)) {
     ggplot(data, aes_string(x = x_var, fill = x_var)) +
@@ -94,8 +103,13 @@ for (i in seq_along(platforms)) {
 
 label_df
 
+<<<<<<< HEAD
 #Add median labels to boxplot
 plot1_with_medians <- plot1 +
+=======
+#Add median labels
+plot1_medians <- plot1 +
+>>>>>>> f47f9b0782c73e54b5279108b6f427454b5272a6
   geom_text(
     data = label_df,
     aes(x = platform_s,
@@ -107,10 +121,14 @@ plot1_with_medians <- plot1 +
     hjust = 0.50
   )
 
-plot1_with_medians
+plot1_medians
 
+<<<<<<< HEAD
 #Save visualization to results folder
 ggplot2::ggsave("results/plot1-function-loop.png", plot = plot1_with_medians, width = 8, height = 7)
+=======
+ggplot2::ggsave("../results/plot1-function-loop.png", plot = plot1_medians, width = 8, height = 7)
+>>>>>>> f47f9b0782c73e54b5279108b6f427454b5272a6
 ```
 
 ## Description of Plot 1 with Function and Loop
@@ -146,8 +164,12 @@ plot2 <- make_plot(game.data.clean, "publisher_s", NULL, geom_bar) +
 
 plot2
 
+<<<<<<< HEAD
 #Save visualization to results folder
 ggplot2::ggsave("results/plot2-function-conditional.png", plot = plot2, width = 8, height = 5)
+=======
+ggplot2::ggsave("../results/plot2-function-conditional.png", plot = plot2, width = 8, height = 5)
+>>>>>>> f47f9b0782c73e54b5279108b6f427454b5272a6
 ```
 
 ## Description of Plot 2 with Function and Conditional
