@@ -24,11 +24,13 @@ library(patchwork)
 
 ## Reading Data
 ```{r}
+# Read CSV file from data folder
 game.data <- read.csv("data/best-selling video games of all time.csv")
 ```
 
 ## Cleaning Data
 ```{r}
+# Clean data using pipe function
 game.data.clean <- game.data %>%
   clean_names() %>%
   remove_empty(which = c("rows", "cols")) %>%
@@ -47,7 +49,7 @@ This cleans the data names, removes any empty columns or rows, and omits any NA 
 ### Plot 1 with Function and Loop
 ```{r, fig.height=7}
 
-#Plot function
+#Plot function that makes basic plot
 make_plot <- function(data, x_var, y_var, geom_layer) {
   if (is.null(y_var)) {
     ggplot(data, aes_string(x = x_var, fill = x_var)) +
@@ -71,7 +73,7 @@ make_plot <- function(data, x_var, y_var, geom_layer) {
       coord_flip()
   }
 }
-#Base plot
+#Base plot for visualization #1 boxplot
 plot1 <- make_plot(game.data.clean, "platform_s", "sales", geom_boxplot) 
 
 plot1 <- plot1 +
@@ -92,7 +94,7 @@ for (i in seq_along(platforms)) {
 
 label_df
 
-#Add median labels
+#Add median labels to boxplot
 plot1_with_medians <- plot1 +
   geom_text(
     data = label_df,
@@ -107,6 +109,7 @@ plot1_with_medians <- plot1 +
 
 plot1_with_medians
 
+#Save visualization to results folder
 ggplot2::ggsave("results/plot1-function-loop.png", plot = plot1_with_medians, width = 8, height = 7)
 ```
 
@@ -122,7 +125,7 @@ Median values were added to the plot to add complexity and increase the amount o
 color.base <- paletteer::paletteer_d("MetBrewer::Signac")
 color <- rep(color.base, length.out = 18)
 
-#Base plot
+#Base plot for visualization #2 bar chart
 plot2 <- make_plot(game.data.clean, "publisher_s", NULL, geom_bar) +
   labs(
     title = "How Many Best-Selling Games Sold By Each Publisher",
@@ -143,16 +146,18 @@ plot2 <- make_plot(game.data.clean, "publisher_s", NULL, geom_bar) +
 
 plot2
 
+#Save visualization to results folder
 ggplot2::ggsave("results/plot2-function-conditional.png", plot = plot2, width = 8, height = 5)
 ```
 
 ## Description of Plot 2 with Function and Conditional
-This plot shows how many of the best selling video games of all time belong to each publisher. The "make_plot" function was used with the y-variable argument as "NULL". This called the conditional of the function to go through the "else" branch to produce a bar plot. 
+This plot shows how many of the best selling video games of all time belong to each publisher. The "make_plot" function was used with the y-variable argument as "NULL". This called the conditional of the function to go through the "else" branch to produce a bar chart. 
 
 A conditional was added to the geom text layer to include labels for the number of games sold by each publisher if the value was greater than 1. This feature adds an additional visual element that makes interpreting the data easier. This plot produces the same visualization as the original code, however adding the conditional made the plot more informative by highlighting publishers with many best-selling games.
 
 ## Responses to Feedback
-There were a few changes that were made to the code and data to improve the visualizations. These include renaming the data folder from "game.data" to "data". Additionally, the style was improved and revised according to style guide in Best Practices. Comments were also added to describe each section of code.  
+There were a few changes that were made to the code and data to improve the visualizations. These include renaming the data folder from "game.data" to "data". Additionally, the style was improved and revised according to style guide in Best Practices handout. Project 1 materials were removed and comments were added to describe each section of code. README file was edited to describe the project, the organization of the project, and 
+how to run code. 
 
 ## References
 https://dplyr.tidyverse.org/
