@@ -1,13 +1,14 @@
 ---
 title: "Project 2"
 authors: "Noel Pop and Georgia Cameron"
-date: "10/31/2025"
+date: "11/21/2025"
 output:
   pdf_document
-subtitle: "CPSC 292 Section #02#"
+subtitle: "CPSC 292 Section #02"
 ---
 
-# Project 1: Best-Selling Video Games of All Time
+# Project 2: Best-Selling Video Games of All Time
+
 ```{r setup, include = FALSE}
 #Loading required libraries
 library(tinytex)
@@ -21,11 +22,12 @@ library(paletteer)
 library(patchwork)
 ```
 
-## Loading And Cleaning Data
+## Reading Data
 ```{r}
 game.data <- read.csv("data/best-selling video games of all time.csv")
 ```
 
+## Cleaning Data
 ```{r}
 game.data.clean <- game.data %>%
   clean_names() %>%
@@ -36,6 +38,7 @@ game.data.clean <- game.data %>%
 platforms <- sort(unique(game.data.clean$platform_s))
 label_df <- data.frame(platform_s = platforms, median_sales = NA)
 ```
+
 ### Cleaning Steps Description:
 This cleans the data names, removes any empty columns or rows, and omits any NA data.
 
@@ -138,10 +141,15 @@ plot2 <- make_plot(game.data.clean, "publisher_s", NULL, geom_bar) +
 
 plot2
 ```
+
 ## Description of Plot 2 with Function and Conditional
 This plot shows how many of the best selling video games of all time belong to each publisher. The "make_plot" function was used with the y-variable argument as "NULL". This called the conditional of the function to go through the "else" branch to produce a bar plot. 
 
 A conditional was added to the geom text layer to include labels for the number of games sold by each publisher if the value was greater than 1. This feature adds an additional visual element that makes interpreting the data easier. This plot produces the same visualization as the original code, however adding the conditional made the plot more informative by highlighting publishers with many best-selling games.
+
+## Responses to Feedback
+There were a few changes that were made to the code and data to improve the visualizations. These include renaming the data folder from "game.data" to "data". Additionally, the style was improved and revised according to style guide in Best Practices. Comments were also added to describe each section of code.  
+
 
 ## References
 https://dplyr.tidyverse.org/
