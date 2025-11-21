@@ -72,7 +72,7 @@ make_plot <- function(data, x_var, y_var, geom_layer) {
 plot1 <- make_plot(game.data.clean, "platform_s", "sales", geom_boxplot) 
 
 plot1 <- plot1 +
-  labs(title = "Number Of Sales of Best-Selling Games On Each Platform", 
+  labs(title = "Number of Sales of Best-Selling Games On Each Platform", 
       x = "Platform", 
       y = "Number of Sold Copies (x100000)") +
   scale_fill_paletteer_d("MetBrewer::Signac") +
@@ -139,7 +139,7 @@ plot2 <- make_plot(game.data.clean, "publisher_s", NULL, geom_bar) +
 plot2
 ```
 ## Description of Plot 2 with Function and Conditional
-These plots show us how many of the best selling video games of all time belong to each publisher. The "make_plot" function was used with the y-variable argument as "NULL". This called the conditional of the function to go through the "else" branch to produce a bar plot. 
+This plot shows how many of the best selling video games of all time belong to each publisher. The "make_plot" function was used with the y-variable argument as "NULL". This called the conditional of the function to go through the "else" branch to produce a bar plot. 
 
 A conditional was added to the geom text layer to include labels for the number of games sold by each publisher if the value was greater than 1. This feature adds an additional visual element that makes interpreting the data easier. This plot produces the same visualization as the original code, however adding the conditional made the plot more informative by highlighting publishers with many best-selling games.
 
